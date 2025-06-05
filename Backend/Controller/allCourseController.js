@@ -63,3 +63,27 @@ exports.enrollStudent = async (req, res) => {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
+
+exports.addQuizToCourse = async (req, res) => {
+  try {
+    const { courseId, quizId } = req.body;
+
+    const course = await Course.findOne({ courseId });
+
+    if (!course) {
+      return res.status(404).json({ msg: "Course not found" });
+    }
+
+    if (course.quizzes.includes(quizId)) {
+      return res.status(400).json({ msg: "Quiz already added" });
+    }
+
+    course.quizzes.push(quizId);
+    await course.save();
+
+    res.status(200).json({ msg: "Quiz added to course", course });
+  } catch (err) {
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+};
+

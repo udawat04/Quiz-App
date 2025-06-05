@@ -3,8 +3,8 @@ const path = require("path")
 const multer = require ("multer")
 
 const { userRegister, userGet } = require("../Controller/registerController")
-const { addCourse, enrollStudent } = require("../Controller/allCourseController")
-const { addQuiz, getAllQuizzes } = require("../Controller/quizController")
+const { addCourse, enrollStudent, addQuizToCourse } = require("../Controller/allCourseController")
+const { addQuiz, getAllQuizzes, createQuiz } = require("../Controller/quizController")
 
 
 const router = express.Router()
@@ -41,17 +41,22 @@ const thumbnailImg = multer.diskStorage({
 
 const uploadthumb = multer({ storage: thumbnailImg });
 
-
+// this for register user
 router.post("/signup", uploadpic.single("profilePic"), userRegister);
+//this is for get user 
 router.get("/userget", userGet);
 
-
+// this is for create course
 router.post("/allcourse", uploadthumb.single("thumbnailUrl"), addCourse);
 
+// this is for enroll student in course collection
 router.post("/enrollstu",enrollStudent)
+// this is for enroll quiz in course collection
+router.post("/addquiz",addQuizToCourse)
 
-
-router.post("/addquiz",addQuiz)
+// this is for create quiz
+router.post("/createquiz",createQuiz)
+// this is for getting quiz
 router.get("/getquiz",getAllQuizzes)
 
 

@@ -1,7 +1,7 @@
 const Quiz = require("../Model/quizModel");
 
 // 🎯 Add Quiz
-exports.addQuiz = async (req, res) => {
+exports.createQuiz = async (req, res) => {
   try {
     const { title, questions, createdBy } = req.body;
 
