@@ -2,7 +2,7 @@ const Register = require("../Model/registerModel")
 
 exports.userRegister = async(req,res)=>{
     try{
-        const { firstName, lastName, email, password, phone, age, dob, profilePic, address, city, state, country, pincode, bio, topics } = req.body;
+        const { firstName, lastName, email, password, phone, age, dob,courses, profilePic, address, city, state, country, pincode, bio, topics } = req.body;
         const existUser = await Register.findOne({email})
         if(existUser){
             return res.status(400).json({msg:"User already exists"})
@@ -16,14 +16,14 @@ exports.userRegister = async(req,res)=>{
           phone,
           age,
           dob,
-          profilePic:imagePath,
+          profilePic: imagePath,
           address,
           city,
           state,
           country,
           pincode,
           bio,
-          topics
+          courses,
         });
         await newUser.save()
         res.status(201).json({message:"User Registered Successfully",newUser})
@@ -35,7 +35,7 @@ exports.userRegister = async(req,res)=>{
 }
 exports.userGet = async (req, res) => {
   try {
-    const result = await Register.find();
+    const result = await Register.find().populate("courses");
     console.log(result);
     return res.status(200).json({ msg: "user get", data: result });
   } catch (error) {

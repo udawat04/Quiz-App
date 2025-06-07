@@ -37,10 +37,6 @@ const CourseSchema = new mongoose.Schema({
   durationInHours: {
     type: Number, // Total course length in hours
   },
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Register", // Reference to User model (admin/instructor)
-  },
   quizzes: [
     {
       type: mongoose.Schema.Types.ObjectId,

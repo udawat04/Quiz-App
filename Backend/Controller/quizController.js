@@ -3,16 +3,16 @@ const Quiz = require("../Model/quizModel");
 // 🎯 Add Quiz
 exports.createQuiz = async (req, res) => {
   try {
-    const { title, questions, createdBy } = req.body;
+    const { title, questions, courseName } = req.body;
 
-    if (!title || !questions || !createdBy) {
+    if (!title || !questions || !courseName) {
       return res.status(400).json({ msg: "All fields are required" });
     }
 
     const newQuiz = new Quiz({
       title,
       questions,
-      createdBy,
+      courseName,
     });
 
     await newQuiz.save();
@@ -26,7 +26,7 @@ exports.createQuiz = async (req, res) => {
 // 📥 Get All Quizzes
 exports.getAllQuizzes = async (req, res) => {
   try {
-    const quizzes = await Quiz.find().populate("createdBy", "firstName email");
+    const quizzes = await Quiz.find().populate("courseName", "firstName email");
 
     res.status(200).json({ quizzes });
   } catch (error) {
@@ -39,7 +39,7 @@ exports.getQuizById = async (req, res) => {
   try {
     const quizId = req.params.id;
     const quiz = await Quiz.findById(quizId).populate(
-      "createdBy",
+      "courseName",
       "firstName email"
     );
 

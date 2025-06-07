@@ -12,9 +12,9 @@ const QuizSchema = new mongoose.Schema({
       correctAnswer: String,
     },
   ],
-  createdBy: {
+  courseName: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Register", // Instructor who created the quiz
+    ref: "Course", 
   },
   createdAt: {
     type: Date,

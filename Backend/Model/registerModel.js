@@ -22,7 +22,9 @@ const registerSchema = new mongoose.Schema(
     country: { type: String },
     pincode: { type: String },
     bio: { type: String },
-    topics: [{ type: String, trim: true }],
+    courses: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Course", trim: true },
+    ],
   },
   { timestamps: true }
 );
