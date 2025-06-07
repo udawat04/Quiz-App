@@ -3,7 +3,7 @@ const path = require("path")
 const multer = require ("multer")
 
 const { userRegister, userGet } = require("../Controller/registerController")
-const { addCourse, enrollStudent, addQuizToCourse } = require("../Controller/allCourseController")
+const { addCourse, enrollStudent, addQuizToCourse, getCourse } = require("../Controller/allCourseController")
 const { addQuiz, getAllQuizzes, createQuiz } = require("../Controller/quizController")
 
 
@@ -48,6 +48,7 @@ router.get("/userget", userGet);
 
 // this is for create course
 router.post("/allcourse", uploadthumb.single("thumbnailUrl"), addCourse);
+router.get("/getcourse",getCourse)
 
 // this is for enroll student in course collection
 router.post("/enrollstu",enrollStudent)
